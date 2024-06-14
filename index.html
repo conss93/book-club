@@ -417,6 +417,19 @@
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
 </script>
+
+<script>
+localStorage.setItem('currentUser', JSON.stringify(user));
+set(ref(database, 'comments/' + newComment.id), newComment);
+
+const commentsRef = ref(database, 'comments');
+get(commentsRef).then((snapshot) => {
+  snapshot.forEach((childSnapshot) => {
+    const comment = childSnapshot.val();
+    displayComment(comment);
+  });
+});
+</script>
 </body>
 </html>
 
